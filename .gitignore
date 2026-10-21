@@ -1,0 +1,23 @@
+# Configuracion local con datos sensibles (nunca versionar)
+/config/config.php
+/config/smtp.secret.php
+
+# Datos de ejecucion: reportes, limites de frecuencia y deduplicacion
+/data/
+
+# Archivos de entorno con credenciales
+.env
+.env.*
+
+# Logs y archivos generados por el sistema
+*.log
+
+# Copias de seguridad y archivos temporales
+*.bak
+*.tmp
+*~
+.DS_Store
+Thumbs.db
+
+# Dependencias instaladas por Composer
+/vendor/

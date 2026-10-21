@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reporta una riña | Sistema de Alerta</title>
+    <meta name="description" content="Portal para reportar oportunamente riñas o confrontaciones físicas. Diligencia el formulario y envía el reporte al equipo responsable.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B5E20">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B5E20'/><text x='50' y='68' font-size='58' text-anchor='middle' fill='%23FFFFFF'>!</text></svg>">
+    <link rel="stylesheet" href="styles/reporte.css">
+  </head>
+  <body>
+    <header class="portal-header">
+      <div class="container portal-header-inner">
+        <div class="portal-marca">
+          <span class="portal-escudo" aria-hidden="true">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/><path d="M12 8.5v4"/><path d="M12 15.6h.01"/></svg>
+          </span>
+          <div class="portal-marca-texto">
+            <strong>Sistema de Alerta</strong>
+            <span>Escuela de Cadetes de Policía General Francisco de Paula Santander</span>
+          </div>
+        </div>
+        <span class="portal-etiqueta">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H7l-3 3V5z"/></svg>
+          Atención ciudadana
+        </span>
+      </div>
+    </header>
+
+    <main class="portal-main">
+      <section class="portal-intro" aria-labelledby="titulo-principal">
+        <span class="portal-eyebrow">Reporte ciudadano</span>
+        <h1 id="titulo-principal">Reporta una riña</h1>
+        <p class="portal-subtitulo">
+          Ayúdanos a informar oportunamente sobre una riña o confrontación física.
+          Completa los datos del incidente para enviar el reporte al equipo responsable.
+        </p>
+
+        <ul class="portal-puntos">
+          <li>
+            <span class="punto-ico" aria-hidden="true">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+            </span>
+            <span>Informa sobre una riña o confrontación física ocurrida o en curso.</span>
+          </li>
+          <li>
+            <span class="punto-ico" aria-hidden="true">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M6 20V9l6-4 6 4v11"/><path d="M10 20v-5h4v5"/></svg>
+            </span>
+            <span>Registra qué ocurrió, dónde, cuándo y el estado del incidente.</span>
+          </li>
+          <li>
+            <span class="punto-ico" aria-hidden="true">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L4 11l6 2 2 6 3-5"/><path d="M21 4l-9 9"/></svg>
+            </span>
+            <span>Al enviarlo, el sistema registra el reporte y notifica al equipo responsable.</span>
+          </li>
+        </ul>
+
+        <div class="alerta-emergencia" role="note">
+          <span class="alerta-ico" aria-hidden="true">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3L12 3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+          </span>
+          <div>
+            <strong>Este formulario no sustituye los canales de emergencia.</strong>
+            Si la riña está ocurriendo en este momento o existe peligro inmediato,
+            contacta de inmediato a las autoridades o a la línea de emergencias
+            (123 en Colombia).
+          </div>
+        </div>
+      </section>
+
+      <section class="portal-formulario" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+          Datos del reporte
+        </h2>
+        <p class="form-nota">Los campos marcados con <span class="obligatorio">*</span> son obligatorios. La información de contacto es opcional.</p>
+
+        <div id="mensaje-estado" class="mensaje" role="status" aria-live="polite" hidden></div>
+
+        <form id="form-reporte" action="api/reportar.php" method="post" novalidate autocomplete="on">
+          <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+          <fieldset>
+            <legend><span class="legend-num">1</span> Datos del incidente</legend>
+
+            <div class="campo">
+              <label for="tipo">Tipo de incidente <span class="obligatorio" aria-hidden="true">*</span></label>
+              <select id="tipo" name="tipo" required aria-describedby="tipo-error">
+                <option value="">Selecciona una opción</option>
+                <option value="rina">Riña</option>
+                <option value="confrontacion">Confrontación física</option>
+              </select>
+              <span class="error-campo" id="tipo-error"></span>
+            </div>
+
+            <div class="campo-row">
+              <div class="campo">
+                <label for="fecha">Fecha del incidente <span class="obligatorio" aria-hidden="true">*</span></label>
+                <input type="date" id="fecha" name="fecha" required aria-describedby="fecha-error">
+                <span class="error-campo" id="fecha-error"></span>
+              </div>
+              <div class="campo">
+                <label for="hora">Hora aproximada <span class="obligatorio" aria-hidden="true">*</span></label>
+                <input type="time" id="hora" name="hora" required aria-describedby="hora-error">
+                <span class="error-campo" id="hora-error"></span>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="estado">Estado del incidente <span class="obligatorio" aria-hidden="true">*</span></label>
+              <select id="estado" name="estado" required aria-describedby="estado-error">
+                <option value="">Selecciona una opción</option>
+                <option value="en_curso">En curso</option>
+                <option value="finalizado">Finalizado</option>
+                <option value="no_se_sabe">No se sabe</option>
+              </select>
+              <span class="error-campo" id="estado-error"></span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span class="legend-num">2</span> Ubicación</legend>
+
+            <div class="campo">
+              <label for="ubicacion">Dirección o lugar (referencia) <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="text" id="ubicacion" name="ubicacion" maxlength="300" required
+                     placeholder="Ej.: Calle 12 con carrera 5, frente al parque"
+                     aria-describedby="ubicacion-ayuda ubicacion-error">
+              <span class="ayuda" id="ubicacion-ayuda">Describe el sitio con la mayor precisión posible.</span>
+              <span class="error-campo" id="ubicacion-error"></span>
+            </div>
+
+            <div class="campo">
+              <label for="ciudad">Ciudad o municipio <span class="obligatorio" aria-hidden="true">*</span></label>
+              <input type="text" id="ciudad" name="ciudad" maxlength="120" required
+                     placeholder="Ej.: Bucaramanga" aria-describedby="ciudad-error">
+              <span class="error-campo" id="ciudad-error"></span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span class="legend-num">3</span> Descripción</legend>
+
+            <div class="campo">
+              <label for="descripcion">Descripción de los hechos <span class="obligatorio" aria-hidden="true">*</span></label>
+              <textarea id="descripcion" name="descripcion" rows="5" minlength="10" maxlength="2000" required
+                        placeholder="Describe brevemente qué está ocurriendo: quiénes participan, qué sucede y cualquier detalle relevante."
+                        aria-describedby="descripcion-error"></textarea>
+              <span class="error-campo" id="descripcion-error"></span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span class="legend-num">4</span> Información de contacto</legend>
+            <p class="nota-contacto">
+              Todos los campos de esta sección son opcionales. Si dejas un medio de contacto,
+              podremos comunicarnos contigo si es necesario para dar seguimiento al reporte.
+              No envíes documentos de identidad ni datos que no sean necesarios.
+            </p>
+
+            <div class="campo">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" maxlength="120" autocomplete="name"
+                     aria-describedby="nombre-error">
+              <span class="error-campo" id="nombre-error"></span>
+            </div>
+
+            <div class="campo-row">
+              <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" maxlength="190" autocomplete="email"
+                       placeholder="nombre@ejemplo.com" aria-describedby="correo-error">
+                <span class="error-campo" id="correo-error"></span>
+              </div>
+              <div class="campo">
+                <label for="telefono">Teléfono de contacto</label>
+                <input type="tel" id="telefono" name="telefono" maxlength="20" autocomplete="tel"
+                       placeholder="Ej.: 300 123 4567" aria-describedby="telefono-error">
+                <span class="error-campo" id="telefono-error"></span>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="campo campo-trampa">
+            <label for="url_sitio">Sitio web</label>
+            <input type="text" id="url_sitio" name="url_sitio" tabindex="-1" autocomplete="off" aria-hidden="true">
+          </div>
+
+          <p class="advertencia-privacidad">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/></svg>
+            <span>Al enviar este formulario, tus datos serán utilizados únicamente para atender y
+            dar seguimiento a este reporte. Este canal no garantiza anonimato ni tiempos
+            específicos de respuesta.</span>
+          </p>
+
+          <button type="submit" class="btn-enviar" id="btn-enviar">
+            <svg class="ico btn-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L4 11l6 2 2 6 3-5"/><path d="M21 4l-9 9"/></svg>
+            <span class="btn-texto">Enviar reporte</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+      </section>
+
+      <section class="portal-como-funciona" aria-labelledby="titulo-como-funciona">
+        <h2 id="titulo-como-funciona">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+          ¿Cómo funciona?
+        </h2>
+        <div class="pasos-grid">
+          <div class="paso">
+            <span class="paso-numero" aria-hidden="true">1</span>
+            <h3>Completa los datos</h3>
+            <p>Registra qué ocurrió, dónde y cuándo. Marca con claridad el estado del incidente.</p>
+          </div>
+          <div class="paso">
+            <span class="paso-numero" aria-hidden="true">2</span>
+            <h3>Envía el reporte</h3>
+            <p>Al enviarlo, el sistema registra la solicitud y la procesa según su configuración.</p>
+          </div>
+          <div class="paso">
+            <span class="paso-numero" aria-hidden="true">3</span>
+            <h3>Recibe confirmación</h3>
+            <p>Verás en pantalla el número de folio de tu reporte cuando haya sido registrado.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <p class="footer-titulo">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/><path d="M12 8.5v4"/><path d="M12 15.6h.01"/></svg>
+          Sistema de Alerta
+        </p>
+        <p>Portal de reporte de riñas y confrontaciones físicas</p>
+        <p>Escuela de Cadetes de Policía General Francisco de Paula Santander</p>
+      </div>
+    </footer>
+
+    <script src="js/reporte.js"></script>
+  </body>
+</html>

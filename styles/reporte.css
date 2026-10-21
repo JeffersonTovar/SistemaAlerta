@@ -1,0 +1,838 @@
+/* =========================================================
+   SistemaAlerta — Skin visual del portal de reporte de riñas
+   Portal institucional moderno de atención ciudadana.
+
+   IMPORTANTE: este archivo es solo presentación.
+   Conserva todos los selectores y contratos usados por
+   js/reporte.js (.campo, .campo.con-error, .error-campo,
+   .mensaje.exito/.error/.aviso, .btn-enviar.enviando,
+   .btn-spinner) y todos los id/name/required del formulario.
+   ========================================================= */
+
+:root {
+  /* Institucionales */
+  --rep-marino: #123A5E;        /* azul marino profundo */
+  --rep-marino-oscuro: #0C2B47;
+  --rep-azul: #1C6BA0;          /* azul medio — acciones */
+  --rep-azul-oscuro: #145179;
+  --rep-azul-claro: #E8F1F8;
+  --rep-acento: #C99A2E;        /* dorado sobrio institucional */
+
+  /* Superficies y texto */
+  --rep-fondo: #F4F6F9;
+  --rep-superficie: #FFFFFF;
+  --rep-gris-claro: #EEF1F5;
+  --rep-borde: #D7DDE5;
+  --rep-borde-fuerte: #C2CAD4;
+  --rep-texto: #1F2933;
+  --rep-texto-sec: #5A6672;
+  --rep-texto-tenue: #8A94A0;
+
+  /* Estados */
+  --rep-rojo: #B3261E;
+  --rep-rojo-oscuro: #8A1B15;
+  --rep-rojo-claro: #FCEDEC;
+  --rep-rojo-borde: #E7B4B0;
+
+  --rep-verde: #1E6E4B;
+  --rep-verde-oscuro: #155237;
+  --rep-verde-claro: #E9F5EF;
+  --rep-verde-borde: #A9D6C0;
+
+  --rep-ambar: #8A5A00;
+  --rep-ambar-oscuro: #6E4700;
+  --rep-ambar-claro: #FFF7E8;
+  --rep-ambar-borde: #E8CD8C;
+
+  /* Sistema visual */
+  --rep-radio: 12px;
+  --rep-radio-sm: 9px;
+  --rep-sombra-sm: 0 1px 2px rgba(16, 32, 51, 0.06), 0 2px 6px rgba(16, 32, 51, 0.05);
+  --rep-sombra: 0 6px 20px rgba(16, 32, 51, 0.09);
+  --rep-sombra-md: 0 14px 40px rgba(16, 32, 51, 0.13);
+  --rep-foco: 0 0 0 3px rgba(28, 107, 160, 0.35);
+}
+
+/* =========================
+   BASE / LAYOUT
+   ========================= */
+
+body {
+  background-color: var(--rep-fondo);
+  color: var(--rep-texto);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.portal-main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 22px 72px;
+}
+
+/* Iconos SVG inline reutilizables */
+.ico {
+  width: 1.15em;
+  height: 1.15em;
+  flex: 0 0 auto;
+  vertical-align: -0.18em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =========================
+   ENCABEZADO INSTITUCIONAL
+   ========================= */
+
+.portal-header {
+  background: var(--rep-marino);
+  background-image: linear-gradient(180deg, #16456D 0%, var(--rep-marino) 55%, var(--rep-marino-oscuro) 100%);
+  color: #ffffff;
+  border-bottom: 3px solid var(--rep-acento);
+  box-shadow: 0 2px 10px rgba(12, 43, 71, 0.28);
+}
+
+.portal-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.portal-marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.portal-escudo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  border-radius: 12px;
+}
+
+.portal-escudo .ico {
+  width: 26px;
+  height: 26px;
+}
+
+.portal-marca-texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.portal-marca-texto strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.portal-marca-texto span {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.portal-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  padding: 7px 15px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.portal-etiqueta .ico {
+  width: 15px;
+  height: 15px;
+  color: var(--rep-acento);
+}
+
+/* =========================
+   INTRODUCCIÓN (HERO)
+   ========================= */
+
+.portal-intro {
+  margin-bottom: 30px;
+}
+
+.portal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: var(--rep-azul-oscuro);
+  background: var(--rep-azul-claro);
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+}
+
+.portal-intro h1 {
+  font-size: clamp(2rem, 5.2vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--rep-marino);
+  letter-spacing: -0.4px;
+  margin: 0 0 14px;
+}
+
+.portal-intro h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  border-radius: 3px;
+  background: var(--rep-acento);
+  margin: 18px 0 0;
+}
+
+.portal-subtitulo {
+  font-size: 1.06rem;
+  color: var(--rep-texto-sec);
+  max-width: 62ch;
+  margin: 18px 0 0;
+}
+
+/* Puntos clave: para qué sirve / qué dar / qué ocurrirá */
+.portal-puntos {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.portal-puntos li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.97rem;
+  color: var(--rep-texto);
+}
+
+.portal-puntos .punto-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: var(--rep-azul-claro);
+  color: var(--rep-azul-oscuro);
+  margin-top: 1px;
+}
+
+.portal-puntos .punto-ico .ico {
+  width: 17px;
+  height: 17px;
+}
+
+/* =========================
+   ADVERTENCIA DE EMERGENCIA
+   ========================= */
+
+.alerta-emergencia {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--rep-rojo-claro);
+  border: 1px solid var(--rep-rojo-borde);
+  border-left: 5px solid var(--rep-rojo);
+  border-radius: var(--rep-radio-sm);
+  padding: 16px 18px;
+  margin-top: 26px;
+  font-size: 0.95rem;
+  color: #6E1510;
+}
+
+.alerta-emergencia .alerta-ico {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--rep-rojo);
+  margin-top: 1px;
+}
+
+.alerta-emergencia .alerta-ico .ico {
+  width: 24px;
+  height: 24px;
+}
+
+.alerta-emergencia strong {
+  display: block;
+  color: var(--rep-rojo-oscuro);
+  margin-bottom: 3px;
+}
+
+.alerta-emergencia a {
+  color: var(--rep-rojo-oscuro);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* =========================
+   TARJETA DEL FORMULARIO
+   ========================= */
+
+.portal-formulario {
+  background: var(--rep-superficie);
+  border: 1px solid var(--rep-borde);
+  border-radius: var(--rep-radio);
+  box-shadow: var(--rep-sombra);
+  padding: 30px 30px 26px;
+  margin-bottom: 52px;
+}
+
+.portal-formulario h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--rep-marino);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.portal-formulario h2 .ico {
+  width: 22px;
+  height: 22px;
+  color: var(--rep-azul);
+}
+
+.portal-formulario .form-nota {
+  color: var(--rep-texto-sec);
+  font-size: 0.95rem;
+  margin: 0 0 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rep-gris-claro);
+}
+
+/* =========================
+   FIELDSETS / GRUPOS
+   ========================= */
+
+fieldset {
+  border: 1px solid var(--rep-borde);
+  border-radius: var(--rep-radio-sm);
+  background: #FCFDFE;
+  padding: 20px 20px 6px;
+  margin: 0 0 22px;
+}
+
+fieldset:last-of-type {
+  margin-bottom: 8px;
+}
+
+legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--rep-marino);
+  background: var(--rep-superficie);
+  padding: 3px 12px;
+  border: 1px solid var(--rep-borde);
+  border-radius: 999px;
+}
+
+legend .legend-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rep-azul);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+/* =========================
+   CAMPOS
+   ========================= */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.campo-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.campo label {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--rep-texto);
+  margin-bottom: 7px;
+}
+
+.obligatorio {
+  color: var(--rep-rojo);
+  font-weight: 800;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  padding: 12px 13px;
+  min-height: 46px;
+  border: 1px solid var(--rep-borde-fuerte);
+  border-radius: var(--rep-radio-sm);
+  background: #ffffff;
+  color: var(--rep-texto);
+  width: 100%;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.campo select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 40px;
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.55;
+}
+
+.campo input:hover:not(:disabled),
+.campo select:hover:not(:disabled),
+.campo textarea:hover:not(:disabled) {
+  border-color: #A7B2BF;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--rep-azul);
+  box-shadow: var(--rep-foco);
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: var(--rep-texto-tenue);
+  opacity: 1;
+}
+
+.ayuda {
+  font-size: 0.83rem;
+  color: var(--rep-texto-sec);
+  margin-top: 6px;
+}
+
+.error-campo {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  color: var(--rep-rojo-oscuro);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.campo.con-error .error-campo {
+  display: flex;
+}
+
+.campo.con-error input,
+.campo.con-error select,
+.campo.con-error textarea {
+  border-color: var(--rep-rojo);
+  background: var(--rep-rojo-claro);
+}
+
+.campo.con-error input:focus,
+.campo.con-error select:focus,
+.campo.con-error textarea:focus {
+  box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.25);
+}
+
+.nota-contacto {
+  font-size: 0.9rem;
+  color: var(--rep-texto-sec);
+  background: var(--rep-azul-claro);
+  border: 1px solid #CFE0EE;
+  border-radius: var(--rep-radio-sm);
+  padding: 13px 15px;
+  margin: 0 0 18px;
+}
+
+/* Trampa antispam: fuera de pantalla (no display:none),
+   conservada exactamente para que los bots la completen. */
+.campo-trampa {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.advertencia-privacidad {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.87rem;
+  color: var(--rep-texto-sec);
+  line-height: 1.55;
+  margin: 0 0 22px;
+}
+
+.advertencia-privacidad .ico {
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  color: var(--rep-azul);
+}
+
+/* =========================
+   MENSAJES DE ESTADO
+   ========================= */
+
+.mensaje {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: var(--rep-radio-sm);
+  padding: 15px 17px;
+  margin-bottom: 22px;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  border: 1px solid transparent;
+  border-left-width: 5px;
+}
+
+.mensaje[hidden] {
+  display: none;
+}
+
+.mensaje strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 1rem;
+}
+
+.mensaje.exito {
+  background: var(--rep-verde-claro);
+  border-color: var(--rep-verde-borde);
+  border-left-color: var(--rep-verde);
+  color: var(--rep-verde-oscuro);
+}
+
+.mensaje.error {
+  background: var(--rep-rojo-claro);
+  border-color: var(--rep-rojo-borde);
+  border-left-color: var(--rep-rojo);
+  color: var(--rep-rojo-oscuro);
+}
+
+.mensaje.aviso {
+  background: var(--rep-ambar-claro);
+  border-color: var(--rep-ambar-borde);
+  border-left-color: var(--rep-ambar);
+  color: var(--rep-ambar-oscuro);
+}
+
+/* =========================
+   BOTÓN PRINCIPAL
+   ========================= */
+
+.btn-enviar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  width: 100%;
+  min-height: 54px;
+  padding: 15px 32px;
+  font-family: inherit;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+  background: var(--rep-azul);
+  border: 1px solid var(--rep-azul-oscuro);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(28, 107, 160, 0.30);
+  transition: background-color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.btn-enviar .btn-ico {
+  width: 19px;
+  height: 19px;
+}
+
+.btn-enviar:hover:not(:disabled) {
+  background: var(--rep-azul-oscuro);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(28, 107, 160, 0.38);
+}
+
+.btn-enviar:focus-visible {
+  outline: 3px solid var(--rep-acento);
+  outline-offset: 3px;
+}
+
+.btn-enviar:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(28, 107, 160, 0.30);
+}
+
+.btn-enviar:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  box-shadow: none;
+}
+
+.btn-spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+.btn-enviar.enviando .btn-ico {
+  display: none;
+}
+
+.btn-enviar.enviando .btn-spinner {
+  display: inline-block;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   CÓMO FUNCIONA
+   ========================= */
+
+.portal-como-funciona h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--rep-marino);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0 0 22px;
+}
+
+.portal-como-funciona h2 .ico {
+  width: 21px;
+  height: 21px;
+  color: var(--rep-azul);
+}
+
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+}
+
+.paso {
+  position: relative;
+  background: var(--rep-superficie);
+  border: 1px solid var(--rep-borde);
+  border-radius: var(--rep-radio-sm);
+  padding: 22px 20px;
+  box-shadow: var(--rep-sombra-sm);
+}
+
+.paso-numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--rep-azul-claro);
+  color: var(--rep-azul-oscuro);
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.paso h3 {
+  margin: 0 0 6px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--rep-marino);
+}
+
+.paso p {
+  font-size: 0.92rem;
+  color: var(--rep-texto-sec);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* =========================
+   PIE INSTITUCIONAL
+   ========================= */
+
+footer {
+  background: var(--rep-marino-oscuro);
+  color: rgba(255, 255, 255, 0.80);
+  border-top: 3px solid var(--rep-acento);
+  text-align: left;
+  padding: 30px 22px;
+}
+
+footer .footer-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+footer .footer-titulo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+footer .footer-titulo .ico {
+  width: 18px;
+  height: 18px;
+  color: var(--rep-acento);
+}
+
+footer p {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.80);
+}
+
+/* =========================
+   ACCESIBILIDAD
+   ========================= */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--rep-acento);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .btn-spinner {
+    animation-duration: 1.6s !important;
+  }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+  .portal-header-inner {
+    gap: 12px;
+  }
+
+  .portal-main {
+    padding: 30px 16px 56px;
+  }
+
+  .portal-formulario {
+    padding: 24px 18px 20px;
+  }
+
+  .campo-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  fieldset {
+    padding: 18px 15px 4px;
+  }
+
+  .portal-etiqueta {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .portal-marca-texto span {
+    display: none;
+  }
+
+  .portal-intro h1 {
+    font-size: 1.8rem;
+  }
+
+  .portal-formulario {
+    padding: 20px 14px 16px;
+  }
+
+  .btn-enviar {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+}
