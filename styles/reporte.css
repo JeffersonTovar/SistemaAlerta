@@ -1,6 +1,6 @@
 /* =========================================================
    SistemaAlerta — Skin visual del portal de reporte de riñas
-   Portal institucional moderno de atención ciudadana.
+   Identidad institucional en verde oliva, legible y sobria.
 
    IMPORTANTE: este archivo es solo presentación.
    Conserva todos los selectores y contratos usados por
@@ -10,23 +10,32 @@
    ========================================================= */
 
 :root {
-  /* Institucionales */
-  --rep-marino: #123A5E;        /* azul marino profundo */
-  --rep-marino-oscuro: #0C2B47;
-  --rep-azul: #1C6BA0;          /* azul medio — acciones */
-  --rep-azul-oscuro: #145179;
-  --rep-azul-claro: #E8F1F8;
-  --rep-acento: #C99A2E;        /* dorado sobrio institucional */
+  /* Paleta institucional: verde oliva */
+  --rep-oliva: #556B2F;
+  --rep-oliva-medio: #6B7F3A;
+  --rep-oliva-oscuro: #3C4B20;
+  --rep-oliva-profundo: #283215;
+  --rep-oliva-claro: #EDF0E0;
+  --rep-oliva-suave: #F5F6EE;
+  --rep-oliva-borde: #DFE4CE;
+  --rep-oliva-borde-hover: #AEB69B;
+  --rep-oliva-superficie: #FCFCF8;
+  --rep-oliva-progreso: #DDE2CE;
+  --rep-header-inicio: #46552A;
+  --rep-footer-inicio: #33401C;
+  --rep-acento: #C4A24A;
+  --rep-acento-claro: #F2E3B6;
+  --rep-emergencia-texto: #6E1510;
 
   /* Superficies y texto */
-  --rep-fondo: #F4F6F9;
+  --rep-fondo: #F4F5EF;
   --rep-superficie: #FFFFFF;
-  --rep-gris-claro: #EEF1F5;
-  --rep-borde: #D7DDE5;
-  --rep-borde-fuerte: #C2CAD4;
-  --rep-texto: #1F2933;
-  --rep-texto-sec: #5A6672;
-  --rep-texto-tenue: #8A94A0;
+  --rep-gris-claro: #EEF0E7;
+  --rep-borde: #D9DDCC;
+  --rep-borde-fuerte: #C5CBB4;
+  --rep-texto: #23281B;
+  --rep-texto-sec: #58604B;
+  --rep-texto-tenue: #8B927E;
 
   /* Estados */
   --rep-rojo: #B3261E;
@@ -34,10 +43,10 @@
   --rep-rojo-claro: #FCEDEC;
   --rep-rojo-borde: #E7B4B0;
 
-  --rep-verde: #1E6E4B;
-  --rep-verde-oscuro: #155237;
-  --rep-verde-claro: #E9F5EF;
-  --rep-verde-borde: #A9D6C0;
+  --rep-verde: #2F6B45;
+  --rep-verde-oscuro: #1F4D30;
+  --rep-verde-claro: #EAF4EC;
+  --rep-verde-borde: #B7D8C0;
 
   --rep-ambar: #8A5A00;
   --rep-ambar-oscuro: #6E4700;
@@ -45,23 +54,42 @@
   --rep-ambar-borde: #E8CD8C;
 
   /* Sistema visual */
-  --rep-radio: 12px;
-  --rep-radio-sm: 9px;
-  --rep-sombra-sm: 0 1px 2px rgba(16, 32, 51, 0.06), 0 2px 6px rgba(16, 32, 51, 0.05);
-  --rep-sombra: 0 6px 20px rgba(16, 32, 51, 0.09);
-  --rep-sombra-md: 0 14px 40px rgba(16, 32, 51, 0.13);
-  --rep-foco: 0 0 0 3px rgba(28, 107, 160, 0.35);
+  --rep-radio: 16px;
+  --rep-radio-sm: 11px;
+  --rep-sombra-sm: 0 1px 2px rgba(36, 45, 22, 0.06), 0 3px 10px rgba(36, 45, 22, 0.05);
+  --rep-sombra: 0 10px 30px rgba(36, 45, 22, 0.10);
+  --rep-foco: 0 0 0 3px rgba(85, 107, 47, 0.30);
 }
 
 /* =========================
    BASE / LAYOUT
    ========================= */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
+  margin: 0;
+  min-height: 100vh;
   background-color: var(--rep-fondo);
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(85, 107, 47, 0.07), transparent 34rem),
+    radial-gradient(circle at 95% 14%, rgba(196, 162, 74, 0.06), transparent 30rem);
   color: var(--rep-texto);
   font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(85, 107, 47, 0.24);
 }
 
 .container {
@@ -71,9 +99,9 @@ body {
 }
 
 .portal-main {
-  max-width: 780px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 40px 22px 72px;
+  padding: 42px 22px 72px;
 }
 
 /* Iconos SVG inline reutilizables */
@@ -94,27 +122,42 @@ body {
    ========================= */
 
 .portal-header {
-  background: var(--rep-marino);
-  background-image: linear-gradient(180deg, #16456D 0%, var(--rep-marino) 55%, var(--rep-marino-oscuro) 100%);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--rep-header-inicio) 0%, var(--rep-oliva) 48%, var(--rep-oliva-profundo) 100%);
   color: #ffffff;
   border-bottom: 3px solid var(--rep-acento);
-  box-shadow: 0 2px 10px rgba(12, 43, 71, 0.28);
+  box-shadow: 0 4px 18px rgba(35, 44, 19, 0.28);
+}
+
+.portal-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.045) 0 1px,
+    transparent 1px 16px
+  );
+  pointer-events: none;
 }
 
 .portal-header-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 20px;
   flex-wrap: wrap;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .portal-marca {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 15px;
   min-width: 0;
 }
 
@@ -122,37 +165,57 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   flex: 0 0 auto;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.10);
   border: 1px solid rgba(255, 255, 255, 0.30);
-  border-radius: 12px;
+  border-radius: 13px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .portal-escudo .ico {
-  width: 26px;
-  height: 26px;
+  width: 27px;
+  height: 27px;
 }
 
 .portal-marca-texto {
   display: flex;
   flex-direction: column;
+  gap: 2px;
   line-height: 1.3;
   min-width: 0;
 }
 
 .portal-marca-texto strong {
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 800;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
 }
 
-.portal-marca-texto span {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.82);
+.portal-marca-subtitulo {
+  max-width: 58ch;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.portal-marca-institucion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--rep-acento-claro);
+}
+
+.portal-marca-institucion .ico {
+  width: 14px;
+  height: 14px;
 }
 
 .portal-etiqueta {
@@ -193,8 +256,9 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.3px;
-  color: var(--rep-azul-oscuro);
-  background: var(--rep-azul-claro);
+  color: var(--rep-oliva-oscuro);
+  background: var(--rep-oliva-claro);
+  border: 1px solid var(--rep-oliva-borde);
   border-radius: 999px;
   padding: 6px 14px;
   margin-bottom: 16px;
@@ -204,7 +268,7 @@ body {
   font-size: clamp(2rem, 5.2vw, 2.7rem);
   font-weight: 800;
   line-height: 1.15;
-  color: var(--rep-marino);
+  color: var(--rep-oliva-oscuro);
   letter-spacing: -0.4px;
   margin: 0 0 14px;
 }
@@ -229,7 +293,7 @@ body {
 /* Puntos clave: para qué sirve / qué dar / qué ocurrirá */
 .portal-puntos {
   list-style: none;
-  margin: 22px 0 0;
+  margin: 24px 0 0;
   padding: 0;
   display: grid;
   gap: 12px;
@@ -247,12 +311,13 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
-  border-radius: 8px;
-  background: var(--rep-azul-claro);
-  color: var(--rep-azul-oscuro);
+  border-radius: 9px;
+  background: var(--rep-oliva-claro);
+  border: 1px solid var(--rep-oliva-borde);
+  color: var(--rep-oliva-oscuro);
   margin-top: 1px;
 }
 
@@ -274,9 +339,10 @@ body {
   border-left: 5px solid var(--rep-rojo);
   border-radius: var(--rep-radio-sm);
   padding: 16px 18px;
-  margin-top: 26px;
+  margin-top: 28px;
   font-size: 0.95rem;
-  color: #6E1510;
+  color: var(--rep-emergencia-texto);
+  box-shadow: var(--rep-sombra-sm);
 }
 
 .alerta-emergencia .alerta-ico {
@@ -308,19 +374,29 @@ body {
    ========================= */
 
 .portal-formulario {
+  position: relative;
+  overflow: hidden;
   background: var(--rep-superficie);
   border: 1px solid var(--rep-borde);
   border-radius: var(--rep-radio);
   box-shadow: var(--rep-sombra);
-  padding: 30px 30px 26px;
-  margin-bottom: 52px;
+  padding: 34px 32px 30px;
+  margin-bottom: 54px;
+}
+
+.portal-formulario::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--rep-oliva) 0%, var(--rep-oliva-medio) 58%, var(--rep-acento) 100%);
 }
 
 .portal-formulario h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--rep-marino);
+  color: var(--rep-oliva-oscuro);
   font-size: 1.4rem;
   font-weight: 800;
   margin: 0 0 4px;
@@ -329,15 +405,72 @@ body {
 .portal-formulario h2 .ico {
   width: 22px;
   height: 22px;
-  color: var(--rep-azul);
+  color: var(--rep-oliva);
 }
 
 .portal-formulario .form-nota {
   color: var(--rep-texto-sec);
   font-size: 0.95rem;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--rep-gris-claro);
+}
+
+/* =========================
+   PROGRESO DEL FORMULARIO
+   ========================= */
+
+.form-progreso {
+  background: var(--rep-oliva-suave);
+  border: 1px solid var(--rep-borde);
+  border-radius: var(--rep-radio-sm);
+  padding: 14px 16px;
+  margin: 0 0 24px;
+}
+
+.form-progreso-cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.form-progreso-etiqueta {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--rep-oliva-oscuro);
+}
+
+.form-progreso-valor {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--rep-oliva);
+  font-variant-numeric: tabular-nums;
+}
+
+.form-progreso-barra {
+  height: 8px;
+  background: var(--rep-oliva-progreso);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.form-progreso-relleno {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--rep-oliva-medio), var(--rep-oliva));
+  transition: width 0.35s ease;
+}
+
+.form-progreso-texto {
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+  color: var(--rep-texto-sec);
 }
 
 /* =========================
@@ -347,9 +480,16 @@ body {
 fieldset {
   border: 1px solid var(--rep-borde);
   border-radius: var(--rep-radio-sm);
-  background: #FCFDFE;
-  padding: 20px 20px 6px;
+  background: var(--rep-oliva-superficie);
+  padding: 22px 20px 8px;
   margin: 0 0 22px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+fieldset:focus-within {
+  border-color: var(--rep-oliva-medio);
+  background: var(--rep-superficie);
+  box-shadow: 0 0 0 3px rgba(85, 107, 47, 0.09);
 }
 
 fieldset:last-of-type {
@@ -364,11 +504,12 @@ legend {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.9px;
-  color: var(--rep-marino);
+  color: var(--rep-oliva-oscuro);
   background: var(--rep-superficie);
   padding: 3px 12px;
   border: 1px solid var(--rep-borde);
   border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(36, 45, 22, 0.05);
 }
 
 legend .legend-num {
@@ -378,10 +519,16 @@ legend .legend-num {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--rep-azul);
+  background: var(--rep-oliva);
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 800;
+}
+
+.fieldset-ayuda {
+  margin: 2px 0 18px;
+  font-size: 0.88rem;
+  color: var(--rep-texto-sec);
 }
 
 /* =========================
@@ -403,8 +550,9 @@ legend .legend-num {
 
 .campo label {
   display: flex;
-  align-items: baseline;
-  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
   font-weight: 600;
   font-size: 0.92rem;
   color: var(--rep-texto);
@@ -416,6 +564,19 @@ legend .legend-num {
   font-weight: 800;
 }
 
+.etiqueta-opcional {
+  margin-left: auto;
+  padding: 2px 7px;
+  border: 1px solid var(--rep-borde);
+  border-radius: 999px;
+  background: var(--rep-gris-claro);
+  color: var(--rep-texto-sec);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
 .campo input,
 .campo select,
 .campo textarea {
@@ -423,10 +584,10 @@ legend .legend-num {
   font-size: 1rem;
   line-height: 1.4;
   padding: 12px 13px;
-  min-height: 46px;
+  min-height: 48px;
   border: 1px solid var(--rep-borde-fuerte);
   border-radius: var(--rep-radio-sm);
-  background: #ffffff;
+  background: var(--rep-superficie);
   color: var(--rep-texto);
   width: 100%;
   transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
@@ -435,7 +596,7 @@ legend .legend-num {
 .campo select {
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2358604B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 13px center;
   padding-right: 40px;
@@ -450,14 +611,14 @@ legend .legend-num {
 .campo input:hover:not(:disabled),
 .campo select:hover:not(:disabled),
 .campo textarea:hover:not(:disabled) {
-  border-color: #A7B2BF;
+  border-color: var(--rep-oliva-borde-hover);
 }
 
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
   outline: none;
-  border-color: var(--rep-azul);
+  border-color: var(--rep-oliva);
   box-shadow: var(--rep-foco);
 }
 
@@ -471,6 +632,26 @@ legend .legend-num {
   font-size: 0.83rem;
   color: var(--rep-texto-sec);
   margin-top: 6px;
+}
+
+.campo-pie {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.campo-pie .ayuda {
+  margin-top: 6px;
+}
+
+.contador {
+  flex: 0 0 auto;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--rep-texto-tenue);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .error-campo {
@@ -503,8 +684,9 @@ legend .legend-num {
 .nota-contacto {
   font-size: 0.9rem;
   color: var(--rep-texto-sec);
-  background: var(--rep-azul-claro);
-  border: 1px solid #CFE0EE;
+  background: var(--rep-oliva-claro);
+  border: 1px solid var(--rep-oliva-borde);
+  border-left: 4px solid var(--rep-oliva-medio);
   border-radius: var(--rep-radio-sm);
   padding: 13px 15px;
   margin: 0 0 18px;
@@ -535,7 +717,7 @@ legend .legend-num {
   width: 17px;
   height: 17px;
   margin-top: 2px;
-  color: var(--rep-azul);
+  color: var(--rep-oliva);
 }
 
 /* =========================
@@ -596,18 +778,18 @@ legend .legend-num {
   justify-content: center;
   gap: 11px;
   width: 100%;
-  min-height: 54px;
+  min-height: 56px;
   padding: 15px 32px;
   font-family: inherit;
   font-size: 1.06rem;
   font-weight: 700;
   letter-spacing: 0.3px;
   color: #ffffff;
-  background: var(--rep-azul);
-  border: 1px solid var(--rep-azul-oscuro);
+  background: linear-gradient(180deg, var(--rep-oliva-medio) 0%, var(--rep-oliva) 100%);
+  border: 1px solid var(--rep-oliva-oscuro);
   border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(28, 107, 160, 0.30);
+  box-shadow: 0 5px 14px rgba(60, 75, 32, 0.30);
   transition: background-color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
 
@@ -617,9 +799,9 @@ legend .legend-num {
 }
 
 .btn-enviar:hover:not(:disabled) {
-  background: var(--rep-azul-oscuro);
+  background: linear-gradient(180deg, var(--rep-oliva) 0%, var(--rep-oliva-oscuro) 100%);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(28, 107, 160, 0.38);
+  box-shadow: 0 9px 22px rgba(60, 75, 32, 0.38);
 }
 
 .btn-enviar:focus-visible {
@@ -629,13 +811,25 @@ legend .legend-num {
 
 .btn-enviar:active:not(:disabled) {
   transform: translateY(0);
-  box-shadow: 0 3px 10px rgba(28, 107, 160, 0.30);
+  box-shadow: 0 3px 10px rgba(60, 75, 32, 0.30);
 }
 
 .btn-enviar:disabled {
   cursor: not-allowed;
   opacity: 0.72;
   box-shadow: none;
+}
+
+.btn-texto-cargando {
+  display: none;
+}
+
+.btn-enviar.enviando .btn-texto {
+  display: none;
+}
+
+.btn-enviar.enviando .btn-texto-cargando {
+  display: inline;
 }
 
 .btn-spinner {
@@ -670,7 +864,7 @@ legend .legend-num {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--rep-marino);
+  color: var(--rep-oliva-oscuro);
   font-size: 1.35rem;
   font-weight: 800;
   margin: 0 0 22px;
@@ -679,7 +873,7 @@ legend .legend-num {
 .portal-como-funciona h2 .ico {
   width: 21px;
   height: 21px;
-  color: var(--rep-azul);
+  color: var(--rep-oliva);
 }
 
 .pasos-grid {
@@ -690,11 +884,21 @@ legend .legend-num {
 
 .paso {
   position: relative;
+  overflow: hidden;
   background: var(--rep-superficie);
   border: 1px solid var(--rep-borde);
   border-radius: var(--rep-radio-sm);
   padding: 22px 20px;
   box-shadow: var(--rep-sombra-sm);
+}
+
+.paso::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rep-oliva-medio), var(--rep-acento));
+  opacity: 0.75;
 }
 
 .paso-numero {
@@ -704,8 +908,9 @@ legend .legend-num {
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  background: var(--rep-azul-claro);
-  color: var(--rep-azul-oscuro);
+  background: var(--rep-oliva-claro);
+  border: 1px solid var(--rep-oliva-borde);
+  color: var(--rep-oliva-oscuro);
   font-weight: 800;
   font-size: 0.95rem;
   margin-bottom: 12px;
@@ -715,7 +920,7 @@ legend .legend-num {
   margin: 0 0 6px;
   font-size: 1.02rem;
   font-weight: 700;
-  color: var(--rep-marino);
+  color: var(--rep-oliva-oscuro);
 }
 
 .paso p {
@@ -729,41 +934,123 @@ legend .legend-num {
    PIE INSTITUCIONAL
    ========================= */
 
-footer {
-  background: var(--rep-marino-oscuro);
-  color: rgba(255, 255, 255, 0.80);
+.portal-footer {
+  background: var(--rep-oliva-profundo);
+  background-image: linear-gradient(135deg, var(--rep-footer-inicio) 0%, var(--rep-oliva-profundo) 100%);
+  color: rgba(255, 255, 255, 0.82);
   border-top: 3px solid var(--rep-acento);
-  text-align: left;
-  padding: 30px 22px;
+  padding: 34px 22px;
 }
 
-footer .footer-inner {
-  max-width: 780px;
+.footer-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  max-width: 820px;
   margin: 0 auto;
 }
 
-footer .footer-titulo {
+.footer-marca {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 14px;
+  min-width: 0;
+}
+
+.footer-escudo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  color: var(--rep-acento);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
+}
+
+.footer-escudo .ico {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-marca-texto {
+  min-width: 0;
+}
+
+.footer-titulo {
+  margin: 0;
   color: #ffffff;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 6px;
 }
 
-footer .footer-titulo .ico {
-  width: 18px;
-  height: 18px;
+.footer-institucion {
+  margin: 2px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.86rem;
+}
+
+.footer-atencion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-atencion-titulo {
+  margin: 0;
+  color: var(--rep-acento);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.footer-linea {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-linea .ico {
+  width: 20px;
+  height: 20px;
   color: var(--rep-acento);
 }
 
-footer p {
-  margin: 0 0 4px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.80);
+.footer-linea-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.footer-linea-numero {
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.footer-linea-texto {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+}
+
+.footer-linea:hover .footer-linea-numero,
+.footer-linea:focus-visible .footer-linea-numero {
+  color: var(--rep-acento-claro);
+}
+
+.footer-nota {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.78rem;
 }
 
 /* =========================
@@ -777,13 +1064,17 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 
   .btn-spinner {
     animation-duration: 1.6s !important;
+    animation-iteration-count: infinite !important;
   }
 }
 
@@ -801,7 +1092,7 @@ button:focus-visible {
   }
 
   .portal-formulario {
-    padding: 24px 18px 20px;
+    padding: 28px 18px 22px;
   }
 
   .campo-row {
@@ -810,17 +1101,47 @@ button:focus-visible {
   }
 
   fieldset {
-    padding: 18px 15px 4px;
+    padding: 20px 16px 8px;
   }
 
   .portal-etiqueta {
     display: none;
   }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    align-items: start;
+  }
 }
 
-@media (max-width: 420px) {
-  .portal-marca-texto span {
-    display: none;
+@media (max-width: 480px) {
+  .portal-escudo {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+  }
+
+  .portal-escudo .ico {
+    width: 23px;
+    height: 23px;
+  }
+
+  .portal-marca {
+    gap: 12px;
+  }
+
+  .portal-marca-texto strong {
+    font-size: 1.04rem;
+  }
+
+  .portal-marca-subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .portal-marca-institucion {
+    font-size: 0.68rem;
+    letter-spacing: 1px;
   }
 
   .portal-intro h1 {
@@ -828,11 +1149,313 @@ button:focus-visible {
   }
 
   .portal-formulario {
-    padding: 20px 14px 16px;
+    padding: 24px 14px 18px;
+    border-radius: 14px;
+  }
+
+  .form-progreso {
+    padding: 12px 13px;
+  }
+
+  .fieldset-ayuda {
+    font-size: 0.84rem;
+  }
+
+  .campo-pie {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 
   .btn-enviar {
     padding: 14px 20px;
     font-size: 1rem;
+  }
+
+  .portal-footer {
+    padding: 28px 18px;
+  }
+}
+
+/* =========================================================
+   PORTADA INSTITUCIONAL Y DISTRIBUCIÓN PRINCIPAL
+   ========================================================= */
+
+.portal-main {
+  max-width: 1200px;
+  padding: 28px 20px 64px;
+}
+
+.portal-hero {
+  position: relative;
+  min-height: clamp(260px, 30vw, 370px);
+  margin-bottom: 38px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--rep-oliva-profundo);
+  border: 1px solid rgba(60, 75, 32, 0.20);
+  border-radius: 20px;
+  box-shadow: 0 18px 44px rgba(36, 45, 22, 0.18);
+}
+
+.portal-hero-media,
+.portal-hero-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portal-hero-media img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.portal-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(20, 27, 11, 0.92) 0%, rgba(28, 37, 15, 0.76) 36%, rgba(32, 43, 17, 0.20) 70%, rgba(32, 43, 17, 0.46) 100%),
+    linear-gradient(0deg, rgba(20, 27, 11, 0.56) 0%, transparent 48%);
+}
+
+.portal-hero-contenido {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: inherit;
+  max-width: 690px;
+  padding: clamp(26px, 4vw, 46px);
+  padding-bottom: clamp(38px, 5vw, 56px);
+}
+
+.portal-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 13px;
+  color: var(--rep-acento-claro);
+  background: rgba(20, 27, 11, 0.42);
+  border: 1px solid rgba(242, 227, 182, 0.30);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+}
+
+.portal-hero-titulo {
+  max-width: 20ch;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.25px;
+  text-wrap: balance;
+}
+
+.portal-hero-descripcion {
+  max-width: 56ch;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.portal-hero-credito {
+  position: absolute;
+  right: 16px;
+  bottom: 13px;
+  z-index: 2;
+  padding: 4px 9px;
+  color: rgba(255, 255, 255, 0.74);
+  background: rgba(20, 27, 11, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  font-size: 0.67rem;
+  letter-spacing: 0.04em;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.portal-col-intro {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: start;
+}
+
+.portal-col-intro .portal-intro,
+.portal-col-intro .portal-puntos-bloque,
+.portal-col-intro .alerta-emergencia {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.portal-grid .portal-formulario {
+  margin-bottom: 0;
+}
+
+.portal-puntos-bloque {
+  padding: 20px 20px 12px;
+  background: var(--rep-superficie);
+  border: 1px solid var(--rep-borde);
+  border-radius: var(--rep-radio-sm);
+  box-shadow: var(--rep-sombra-sm);
+}
+
+.puntos-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: var(--rep-oliva-oscuro);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.puntos-titulo .ico {
+  width: 18px;
+  height: 18px;
+  color: var(--rep-oliva);
+}
+
+.portal-puntos-bloque .portal-puntos {
+  margin: 0;
+}
+
+.portal-puntos-bloque .portal-puntos li {
+  font-size: 0.93rem;
+}
+
+.portal-como-funciona {
+  margin-top: 46px;
+}
+
+.footer-inner {
+  max-width: 1160px;
+}
+
+@media (max-width: 980px) {
+  .portal-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .portal-col-intro {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .portal-main {
+    padding: 22px 16px 56px;
+  }
+
+  .portal-hero {
+    min-height: 200px;
+    margin-bottom: 24px;
+    border-radius: 16px;
+  }
+
+  .portal-hero::after {
+    background:
+      linear-gradient(90deg, rgba(20, 27, 11, 0.90) 0%, rgba(28, 37, 15, 0.66) 58%, rgba(32, 43, 17, 0.38) 100%),
+      linear-gradient(0deg, rgba(20, 27, 11, 0.62) 0%, transparent 60%);
+  }
+
+  .portal-hero-contenido {
+    padding: 20px 18px 24px;
+    max-width: 100%;
+  }
+
+  .portal-hero-titulo {
+    max-width: 20ch;
+    font-size: clamp(1.3rem, 5.5vw, 1.6rem);
+  }
+
+  .portal-hero-descripcion {
+    display: none;
+  }
+
+  .portal-hero-credito {
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+    font-size: 0.62rem;
+  }
+
+  .portal-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .portal-col-intro {
+    display: contents;
+  }
+
+  .portal-col-intro .portal-intro {
+    order: 1;
+    margin-bottom: 18px;
+  }
+
+  .portal-col-intro .alerta-emergencia {
+    order: 2;
+    margin: 0 0 22px;
+  }
+
+  .portal-grid .portal-formulario {
+    order: 3;
+    margin-bottom: 30px;
+  }
+
+  .portal-col-intro .portal-puntos-bloque {
+    order: 4;
+    margin: 0 0 30px;
+  }
+
+  .portal-como-funciona {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .portal-hero {
+    min-height: 190px;
+    border-radius: 14px;
+  }
+
+  .portal-hero-contenido {
+    padding: 18px 16px 22px;
+  }
+
+  .portal-hero-titulo {
+    font-size: 1.25rem;
+  }
+
+  .portal-hero-credito {
+    padding: 3px 7px;
+    font-size: 0.58rem;
+  }
+
+  .portal-puntos-bloque {
+    padding: 18px 16px 10px;
   }
 }

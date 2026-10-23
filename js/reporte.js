@@ -10,9 +10,28 @@
   var btn = document.getElementById("btn-enviar");
   var cajaMensaje = document.getElementById("mensaje-estado");
   var inputToken = document.getElementById("csrf_token");
+  var barraProgreso = document.getElementById("progreso-barra");
+  var rellenoProgreso = document.getElementById("progreso-relleno");
+  var valorProgreso = document.getElementById("progreso-valor");
+  var textoProgreso = document.getElementById("progreso-texto");
+  var descripcion = document.getElementById("descripcion");
+  var contadorDescripcion = document.getElementById("descripcion-contador");
+  var movimientoReducido = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
 
   var enviando = false;
   var tokenExpiradoEn = 0;
+
+  var CAMPOS_OBLIGATORIOS = [
+    "tipo",
+    "fecha",
+    "hora",
+    "estado",
+    "ubicacion",
+    "ciudad",
+    "descripcion"
+  ];
 
   var CAMPOS = {
     tipo: "Selecciona el tipo de incidente.",
@@ -44,6 +63,39 @@
     var hora = document.getElementById("hora");
     if (fecha && !fecha.value) fecha.value = hoyISO();
     if (hora && !hora.value) hora.value = horaISO();
+  }
+
+  function actualizarProgreso() {
+    var completos = 0;
+    CAMPOS_OBLIGATORIOS.forEach(function (nombre) {
+      var campo = document.getElementById(nombre);
+      if (campo && campo.value.trim() !== "") completos++;
+    });
+
+    var total = CAMPOS_OBLIGATORIOS.length;
+    var porcentaje = Math.round((completos / total) * 100);
+
+    if (rellenoProgreso) rellenoProgreso.style.width = porcentaje + "%";
+    if (barraProgreso) barraProgreso.setAttribute("aria-valuenow", String(porcentaje));
+    if (valorProgreso) valorProgreso.textContent = porcentaje + "%";
+    if (textoProgreso) {
+      textoProgreso.textContent = completos === total
+        ? "Campos obligatorios completos. Revisa la información y envía el reporte."
+        : completos + " de " + total + " campos obligatorios completados.";
+    }
+  }
+
+  function actualizarContador() {
+    if (descripcion && contadorDescripcion) {
+      contadorDescripcion.textContent = descripcion.value.length + " / 2000";
+    }
+  }
+
+  function reiniciarFormulario() {
+    form.reset();
+    predefinirMomento();
+    actualizarProgreso();
+    actualizarContador();
   }
 
   function obtenerToken(forzar) {
@@ -96,7 +148,8 @@
       span.textContent = detalle;
       cajaMensaje.appendChild(span);
     }
-    cajaMensaje.scrollIntoView({ behavior: "smooth", block: "center" });
+    var comportamiento = movimientoReducido && movimientoReducido.matches ? "auto" : "smooth";
+    cajaMensaje.scrollIntoView({ behavior: comportamiento, block: "center" });
   }
 
   function ocultarMensaje() {
@@ -191,9 +244,8 @@
 
     if (cuerpo.ok && cuerpo.status === "enviado") {
       mostrarMensaje("exito", "Reporte recibido y registrado.",
-        "Folio " + cuerpo.folio + ". La notificación fue aceptada por el servidor de correo y quedó en cola para entrega al equipo responsable.");
-      form.reset();
-      predefinirMomento();
+        "Folio " + cuerpo.folio + ". La notificación fue aceptada por el servidor de correo y quedó en cola para entrega a la dependencia encargada de recibir el reporte.");
+      reiniciarFormulario();
       obtenerToken(true).catch(function () {});
       return;
     }
@@ -201,8 +253,7 @@
     if (cuerpo.ok && cuerpo.status === "registrado_sin_correo") {
       mostrarMensaje("aviso", "Reporte registrado.",
         "Folio " + cuerpo.folio + ". El reporte quedó guardado, pero la notificación por correo no pudo enviarse porque el canal de correo aún no está disponible.");
-      form.reset();
-      predefinirMomento();
+      reiniciarFormulario();
       obtenerToken(true).catch(function () {});
       return;
     }
@@ -210,8 +261,7 @@
     if (cuerpo.ok && cuerpo.status === "correo_fallido") {
       mostrarMensaje("aviso", "Reporte registrado, pero la notificación falló.",
         "Folio " + cuerpo.folio + ". El reporte quedó guardado, pero no fue posible enviar el correo de notificación. No se envió ningún correo. Intenta de nuevo más tarde.");
-      form.reset();
-      predefinirMomento();
+      reiniciarFormulario();
       obtenerToken(true).catch(function () {});
       return;
     }
@@ -219,8 +269,7 @@
     if (cuerpo.ok && cuerpo.status === "duplicado") {
       mostrarMensaje("exito", "Este reporte ya fue registrado.",
         "Folio " + cuerpo.folio + ". No es necesario enviarlo de nuevo.");
-      form.reset();
-      predefinirMomento();
+      reiniciarFormulario();
       obtenerToken(true).catch(function () {});
       return;
     }
@@ -246,8 +295,8 @@
     if (enviando) return;
     var errores = validar();
     if (errores > 0) {
-      mostrarMensaje("error", "Faltan datos por completar.",
-        "Revisa los campos marcados antes de enviar el reporte.");
+      mostrarMensaje("error", "Revisa la información ingresada.",
+        "Corrige los campos marcados antes de enviar el reporte.");
       var primerError = form.querySelector(".campo.con-error input, .campo.con-error select, .campo.con-error textarea");
       if (primerError) primerError.focus();
       return;
@@ -256,6 +305,7 @@
     enviando = true;
     btn.disabled = true;
     btn.classList.add("enviando");
+    btn.setAttribute("aria-busy", "true");
     ocultarMensaje();
 
     obtenerToken(false)
@@ -285,6 +335,7 @@
         enviando = false;
         btn.disabled = false;
         btn.classList.remove("enviando");
+        btn.removeAttribute("aria-busy");
       });
   });
 
@@ -295,8 +346,16 @@
       var caja = campo.querySelector(".error-campo");
       if (caja) caja.textContent = "";
     }
+    actualizarProgreso();
+    actualizarContador();
+  });
+
+  form.addEventListener("change", function () {
+    actualizarProgreso();
   });
 
   predefinirMomento();
+  actualizarProgreso();
+  actualizarContador();
   obtenerToken(false).catch(function () {});
 })();

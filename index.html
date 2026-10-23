@@ -2,11 +2,11 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8">
-    <title>Reporta una riña | Sistema de Alerta</title>
-    <meta name="description" content="Portal para reportar oportunamente riñas o confrontaciones físicas. Diligencia el formulario y envía el reporte al equipo responsable.">
+    <title>Reporta una riña | Sistema de Alerta — Policía Nacional</title>
+    <meta name="description" content="Portal para reportar oportunamente riñas o confrontaciones físicas. Diligencia el formulario y envía el reporte a la dependencia encargada de recibirlo.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0B5E20">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B5E20'/><text x='50' y='68' font-size='58' text-anchor='middle' fill='%23FFFFFF'>!</text></svg>">
+    <meta name="theme-color" content="#3C4B20">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233C4B20'/><text x='50' y='68' font-size='58' text-anchor='middle' fill='%23FFFFFF'>!</text></svg>">
     <link rel="stylesheet" href="styles/reporte.css">
   </head>
   <body>
@@ -18,7 +18,11 @@
           </span>
           <div class="portal-marca-texto">
             <strong>Sistema de Alerta</strong>
-            <span>Escuela de Cadetes de Policía General Francisco de Paula Santander</span>
+            <span class="portal-marca-subtitulo">Portal de reporte de riñas y confrontaciones físicas</span>
+            <span class="portal-marca-institucion">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/></svg>
+              Policía Nacional
+            </span>
           </div>
         </div>
         <span class="portal-etiqueta">
@@ -29,15 +33,44 @@
     </header>
 
     <main class="portal-main">
+      <section class="portal-hero" aria-labelledby="hero-titulo">
+        <div class="portal-hero-media">
+          <!--
+            Marcador temporal de la portada.
+            Para usar la imagen autorizada:
+            1. Guarda el archivo en assets/portada-institucional.webp (o .jpg).
+            2. Cambia el src de la imagen siguiente por esa ruta.
+            Medidas recomendadas: 1600x600 para escritorio y 800x600 para móvil.
+          -->
+          <img id="portada-institucional"
+               src="assets/portada-institucional.jpg"
+               alt="Espacio reservado para una imagen institucional autorizada de la Policía Nacional de Colombia"
+               width="1600" height="600" fetchpriority="high" decoding="async">
+        </div>
+        <div class="portal-hero-contenido">
+          <span class="portal-hero-eyebrow">Convivencia ciudadana</span>
+          <p id="hero-titulo" class="portal-hero-titulo">Prevención de riñas y reporte oportuno</p>
+          <p class="portal-hero-descripcion">Informa lo ocurrido para orientar la atención del caso y contribuir a la convivencia en tu comunidad.</p>
+        </div>
+      </section>
+
+      <div class="portal-grid">
+        <div class="portal-col-intro">
       <section class="portal-intro" aria-labelledby="titulo-principal">
         <span class="portal-eyebrow">Reporte ciudadano</span>
         <h1 id="titulo-principal">Reporta una riña</h1>
         <p class="portal-subtitulo">
           Ayúdanos a informar oportunamente sobre una riña o confrontación física.
-          Completa los datos del incidente para enviar el reporte al equipo responsable.
+          Completa los datos del incidente para enviar el reporte a la dependencia encargada de recibirlo.
         </p>
+      </section>
 
-        <ul class="portal-puntos">
+        <section class="portal-puntos-bloque" aria-labelledby="titulo-puntos">
+          <h2 id="titulo-puntos" class="puntos-titulo">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/><path d="M12 8.5v4"/><path d="M12 15.6h.01"/></svg>
+            Prevención y convivencia
+          </h2>
+          <ul class="portal-puntos">
           <li>
             <span class="punto-ico" aria-hidden="true">
               <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
@@ -54,11 +87,12 @@
             <span class="punto-ico" aria-hidden="true">
               <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L4 11l6 2 2 6 3-5"/><path d="M21 4l-9 9"/></svg>
             </span>
-            <span>Al enviarlo, el sistema registra el reporte y notifica al equipo responsable.</span>
+            <span>Al enviarlo, el sistema registra el reporte y notifica a la dependencia encargada de recibirlo.</span>
           </li>
-        </ul>
+          </ul>
+        </section>
 
-        <div class="alerta-emergencia" role="note">
+          <div class="alerta-emergencia" role="note">
           <span class="alerta-ico" aria-hidden="true">
             <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3L12 3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
           </span>
@@ -68,15 +102,28 @@
             contacta de inmediato a las autoridades o a la línea de emergencias
             (123 en Colombia).
           </div>
+          </div>
         </div>
-      </section>
 
-      <section class="portal-formulario" aria-labelledby="titulo-formulario">
+        <section class="portal-formulario" aria-labelledby="titulo-formulario">
         <h2 id="titulo-formulario">
           <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h9l5 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
           Datos del reporte
         </h2>
         <p class="form-nota">Los campos marcados con <span class="obligatorio">*</span> son obligatorios. La información de contacto es opcional.</p>
+
+        <div class="form-progreso" id="form-progreso">
+          <div class="form-progreso-cabecera">
+            <span class="form-progreso-etiqueta" id="progreso-etiqueta">Avance del formulario</span>
+            <span class="form-progreso-valor" id="progreso-valor">0%</span>
+          </div>
+          <div class="form-progreso-barra" id="progreso-barra" role="progressbar"
+               aria-labelledby="progreso-etiqueta" aria-describedby="progreso-texto"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span class="form-progreso-relleno" id="progreso-relleno"></span>
+          </div>
+          <p class="form-progreso-texto" id="progreso-texto">0 de 7 campos obligatorios completados.</p>
+        </div>
 
         <div id="mensaje-estado" class="mensaje" role="status" aria-live="polite" hidden></div>
 
@@ -85,6 +132,7 @@
 
           <fieldset>
             <legend><span class="legend-num">1</span> Datos del incidente</legend>
+            <p class="fieldset-ayuda">Indica qué ocurrió y en qué momento. Ajusta la fecha y la hora si no coinciden con el momento actual.</p>
 
             <div class="campo">
               <label for="tipo">Tipo de incidente <span class="obligatorio" aria-hidden="true">*</span></label>
@@ -123,6 +171,7 @@
 
           <fieldset>
             <legend><span class="legend-num">2</span> Ubicación</legend>
+            <p class="fieldset-ayuda">Señala el lugar con la mayor precisión posible para facilitar la ubicación del incidente.</p>
 
             <div class="campo">
               <label for="ubicacion">Dirección o lugar (referencia) <span class="obligatorio" aria-hidden="true">*</span></label>
@@ -143,12 +192,17 @@
 
           <fieldset>
             <legend><span class="legend-num">3</span> Descripción</legend>
+            <p class="fieldset-ayuda">Cuéntanos brevemente qué sucedió. Incluye solo los detalles útiles para comprender el incidente.</p>
 
             <div class="campo">
               <label for="descripcion">Descripción de los hechos <span class="obligatorio" aria-hidden="true">*</span></label>
               <textarea id="descripcion" name="descripcion" rows="5" minlength="10" maxlength="2000" required
                         placeholder="Describe brevemente qué está ocurriendo: quiénes participan, qué sucede y cualquier detalle relevante."
-                        aria-describedby="descripcion-error"></textarea>
+                        aria-describedby="descripcion-ayuda descripcion-error"></textarea>
+              <div class="campo-pie">
+                <span class="ayuda" id="descripcion-ayuda">Mínimo 10 caracteres. Evita incluir datos que no sean necesarios.</span>
+                <span class="contador" id="descripcion-contador" aria-hidden="true">0 / 2000</span>
+              </div>
               <span class="error-campo" id="descripcion-error"></span>
             </div>
           </fieldset>
@@ -162,7 +216,7 @@
             </p>
 
             <div class="campo">
-              <label for="nombre">Nombre</label>
+              <label for="nombre">Nombre <span class="etiqueta-opcional">Opcional</span></label>
               <input type="text" id="nombre" name="nombre" maxlength="120" autocomplete="name"
                      aria-describedby="nombre-error">
               <span class="error-campo" id="nombre-error"></span>
@@ -170,13 +224,13 @@
 
             <div class="campo-row">
               <div class="campo">
-                <label for="correo">Correo electrónico</label>
+                <label for="correo">Correo electrónico <span class="etiqueta-opcional">Opcional</span></label>
                 <input type="email" id="correo" name="correo" maxlength="190" autocomplete="email"
                        placeholder="nombre@ejemplo.com" aria-describedby="correo-error">
                 <span class="error-campo" id="correo-error"></span>
               </div>
               <div class="campo">
-                <label for="telefono">Teléfono de contacto</label>
+                <label for="telefono">Teléfono de contacto <span class="etiqueta-opcional">Opcional</span></label>
                 <input type="tel" id="telefono" name="telefono" maxlength="20" autocomplete="tel"
                        placeholder="Ej.: 300 123 4567" aria-describedby="telefono-error">
                 <span class="error-campo" id="telefono-error"></span>
@@ -199,10 +253,12 @@
           <button type="submit" class="btn-enviar" id="btn-enviar">
             <svg class="ico btn-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 4L4 11l6 2 2 6 3-5"/><path d="M21 4l-9 9"/></svg>
             <span class="btn-texto">Enviar reporte</span>
+            <span class="btn-texto-cargando">Enviando reporte…</span>
             <span class="btn-spinner" aria-hidden="true"></span>
           </button>
         </form>
-      </section>
+        </section>
+      </div>
 
       <section class="portal-como-funciona" aria-labelledby="titulo-como-funciona">
         <h2 id="titulo-como-funciona">
@@ -229,14 +285,29 @@
       </section>
     </main>
 
-    <footer>
+    <footer class="portal-footer">
       <div class="footer-inner">
-        <p class="footer-titulo">
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/><path d="M12 8.5v4"/><path d="M12 15.6h.01"/></svg>
-          Sistema de Alerta
-        </p>
-        <p>Portal de reporte de riñas y confrontaciones físicas</p>
-        <p>Escuela de Cadetes de Policía General Francisco de Paula Santander</p>
+        <div class="footer-marca">
+          <span class="footer-escudo" aria-hidden="true">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.4-7 9.8C8 19.4 5 15.4 5 11V6l7-3z"/><path d="M12 8.5v4"/><path d="M12 15.6h.01"/></svg>
+          </span>
+          <div class="footer-marca-texto">
+            <p class="footer-titulo">Sistema de Alerta</p>
+            <p class="footer-institucion">Policía Nacional</p>
+          </div>
+        </div>
+
+        <div class="footer-atencion">
+          <p class="footer-atencion-titulo">Atención de emergencias</p>
+          <a class="footer-linea" href="tel:123">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a13 13 0 0 0 6.5 6.5l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3z"/></svg>
+            <span class="footer-linea-info">
+              <span class="footer-linea-numero">123</span>
+              <span class="footer-linea-texto">Línea de emergencias en Colombia</span>
+            </span>
+          </a>
+          <p class="footer-nota">Este formulario no sustituye los canales de emergencia.</p>
+        </div>
       </div>
     </footer>
 
